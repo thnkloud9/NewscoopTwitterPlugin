@@ -1,0 +1,4 @@
+newscoop_twitter_plugin:
+    resource: "@NewscoopTwitterPluginBundle/Controller/TwitterController.php"
+    type:     annotation
+    prefix:   /
