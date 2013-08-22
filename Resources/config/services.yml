@@ -10,8 +10,3 @@ services:
         tags:
             - { name: kernel.event_subscriber}
 
-    newscoop_twitter_plugin.hooks.listener:
-        class:     "Newscoop\TwitterPluginBundle\EventListener\HooksListener"
-        arguments: ["@service_container"]
-        tags:
-          - { name: kernel.event_listener, event: newscoop_admin.interface.article.edit.sidebar, method: sidebar }

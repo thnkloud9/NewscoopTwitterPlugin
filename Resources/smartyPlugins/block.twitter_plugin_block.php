@@ -32,5 +32,19 @@ function smarty_block_twitter_plugin_block($params, $content, &$smarty, &$repeat
     $smarty->smarty->loadPlugin('smarty_shared_escape_special_chars');
     $context = $smarty->getTemplateVars('gimme');
 
-    return '<h2>Twitter plugin block</h2>';
+    $html = "
+        <div class='js-twitter-widget-container'></div>
+        <script type='text/javascript'>
+        $.ajax({
+            type: 'POST',
+            url: '/twitternewscoop',
+            dataType: 'html',
+            success: function(msg){
+                $('.js-twitter-widget-container').html(msg);
+            }
+        });
+        </script>";
+
+    return $html;
+
 }

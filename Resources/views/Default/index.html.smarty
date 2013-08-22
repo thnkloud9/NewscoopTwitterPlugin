@@ -1,3 +1,0 @@
-<h1>twitter plugin hello !</h1>
-
-{{ twitter_plugin_block }} {{ /twitter_plugin_block }}
