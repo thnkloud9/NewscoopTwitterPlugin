@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TwitterController extends Controller
 {
     /**
-     * @Route("/twitternewscoop")
+     * @Route("/plugin/twitter/latesttweet")
      */
     public function indexAction(Request $request)
     {

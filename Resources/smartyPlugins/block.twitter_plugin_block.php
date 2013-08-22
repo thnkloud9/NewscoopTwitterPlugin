@@ -37,7 +37,7 @@ function smarty_block_twitter_plugin_block($params, $content, &$smarty, &$repeat
         <script type='text/javascript'>
         $.ajax({
             type: 'POST',
-            url: '/twitternewscoop',
+            url: '/plugin/twitter/latesttweet',
             dataType: 'html',
             success: function(msg){
                 $('.js-twitter-widget-container').html(msg);
