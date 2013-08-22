@@ -1,4 +1,8 @@
 services:
+    imports:
+        - { resource: twitter.conf.yml }
+        - { resource: twitter.yml }
+
     newscoop_twitter_plugin.lifecyclesubscriber:
         class: Newscoop\TwitterPluginBundle\EventListener\LifecycleSubscriber
         arguments:

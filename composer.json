@@ -14,6 +14,7 @@
     "require": {
         "php": ">=5.3.3",
         "newscoop/plugins-installer": "*"
+        "guzzle/guzzle": "dev-master"
     },
     "autoload": {
         "psr-0": { "Newscoop\\TwitterPluginBundle\\NewscoopTwitterPluginBundle": "" }

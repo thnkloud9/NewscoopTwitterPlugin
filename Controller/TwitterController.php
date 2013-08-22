@@ -14,7 +14,13 @@ class TwitterController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('NewscoopTwitterPluginBundle:Default:index.html.smarty');
+        $twitterClient = $this->container->get('guzzle.twitter.client');
+        $status = $twitterClient->get('statuses/user_timeline.json')
+             ->send()->getBody();
+
+        return $this->render('NewscoopTwitterPluginBundle:Default:index.html.smarty', array(
+            'status' => $status
+        ));
     }
 
 }
