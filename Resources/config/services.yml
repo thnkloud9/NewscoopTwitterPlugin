@@ -1,8 +1,8 @@
-services:
-    imports:
-        - { resource: twitter.conf.yml }
-        - { resource: twitter.yml }
+imports:
+    - { resource: twitter.conf.yml }
+    - { resource: twitter.yml }
 
+services:
     newscoop_twitter_plugin.lifecyclesubscriber:
         class: Newscoop\TwitterPluginBundle\EventListener\LifecycleSubscriber
         arguments:
