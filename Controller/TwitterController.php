@@ -37,7 +37,7 @@ class TwitterController extends Controller
 
         $html = "<p class='entry'>".$tweetMsg."</p>";
         $html .= "<p class='tweet_meta'> <a href='http://twitter.com/".$tweetCreatedBy."' class='account_name' target='_blank'>@".$tweetCreatedBy."</a>";
-        $html .= "<span class='tweet_published'> <a href='http://www.twitter.com/".$tweetCreatedBy."/status/". $latestTweet["id"]."'>".$tweetCreatedAt."</a></span>"; 
+        $html .= "<span class='tweet_published'> <a href='http://www.twitter.com/".$tweetCreatedBy."/status/". $latestTweet["id"]."' target='_blank'>".$tweetCreatedAt."</a></span>"; 
 
         return new Response($html);
 
