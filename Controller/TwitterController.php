@@ -33,11 +33,11 @@ class TwitterController extends Controller
         $tweetMsg = $latestTweet["text"];
         $tweetMsg = preg_replace("/([\w]+\:\/\/[\w-?&;#~=.\/\@]+[\w\/])/", "<a target='_blank' href='$1'>$1</a>", $tweetMsg);
         $tweetMsg = preg_replace("/#([A-Za-z0-9\/.]*)/", "<a target='_blank' href='http://twitter.com/search?q=$1'>#$1</a>", $tweetMsg);
-        $tweetMsg = preg_replace("/@([A-Za-z0-9\/.]*)/", "<a target='_blank' href='http://www.twitter.com/$1'>@$1</a>", $tweetMsg);
+        $tweetMsg = preg_replace("/@([A-Za-z0-9\/.]+)/", "<a target='_blank' href='http://www.twitter.com/$1'>@$1</a>", $tweetMsg);
 
         $html = "<p class='entry'>".$tweetMsg."</p>";
-        $html .= "<p class='tweet_meta'><a href='http://twitter.com/".$tweetCreatedBy."' class='account_name' target='_blank'> @".$tweetCreatedBy."</a>";
-        $html .= "<span class='tweet_published'><a href='http://www.twitter.com/".$tweetCreatedBy."/status/". $latestTweet["id"]."'> ".$tweetCreatedAt."</a></span>"; 
+        $html .= "<p class='tweet_meta'> <a href='http://twitter.com/".$tweetCreatedBy."' class='account_name' target='_blank'>@".$tweetCreatedBy."</a>";
+        $html .= "<span class='tweet_published'> <a href='http://www.twitter.com/".$tweetCreatedBy."/status/". $latestTweet["id"]."'>".$tweetCreatedAt."</a></span>"; 
 
         return new Response($html);
 
