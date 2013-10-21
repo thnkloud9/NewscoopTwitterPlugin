@@ -3,6 +3,8 @@ imports:
     - { resource: twitter.yml }
 
 services:
+    cache:
+        class: Doctrine\Common\Cache\ApcCache
     newscoop_twitter_plugin.lifecyclesubscriber:
         class: Newscoop\TwitterPluginBundle\EventListener\LifecycleSubscriber
         arguments:
