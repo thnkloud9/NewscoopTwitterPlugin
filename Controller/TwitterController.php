@@ -15,11 +15,25 @@ class TwitterController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $twitterClient = $this->container->get('guzzle.twitter.client');
-        $response = $twitterClient->get('statuses/user_timeline.json')
-             ->send()->getBody();
+        $fOpts = array(
+            'lifetime' => 300,
+        );
 
-        $twitterFeed = json_decode($response, true);
+        $bOpts = array(
+            'cache_dir' => APPLICATION_PATH . '/../cache/'
+        );
+
+        $cache = Zend_Cache::factory('Core', 'File', $fOpts, $bOpts);
+        $cache_key = md5("__twitterplugin_cache_user_timeline");
+
+        if (!$json = $cache->load($cache_key)) {
+            $twitterClient = $this->container->get('guzzle.twitter.client');
+            $json = $twitterClient->get('statuses/user_timeline.json')
+             ->send()->getBody();
+            $cache->save($json, $cache_key);
+        }
+
+        $twitterFeed = json_decode($json, true);
 
         // get the latest tweet
         $latestTweet = $twitterFeed[0];
