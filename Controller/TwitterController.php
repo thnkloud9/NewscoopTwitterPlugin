@@ -17,13 +17,13 @@ class TwitterController extends Controller
     {
         $cache_key = md5("__twitterplugin_cache_user_timeline");
 
-        if ($jsonString = $this->get('cache')->fetch($cache_key)) {
+        if ($jsonString = $this->container->get('cache')->fetch($cache_key)) {
             $json = unserialize($jsonString);
         } else {
             $twitterClient = $this->container->get('guzzle.twitter.client');
             $json = $twitterClient->get('statuses/user_timeline.json')
              ->send()->getBody();
-            $this->get('cache')->save($cache_key, serialize($json));
+            $this->container->get('cache')->save($cache_key, serialize($json));
         }
 
         $twitterFeed = json_decode($json, true);
