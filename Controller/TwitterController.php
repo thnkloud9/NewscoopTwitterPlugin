@@ -4,7 +4,6 @@ namespace Newscoop\TwitterPluginBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,13 +16,13 @@ class TwitterController extends Controller
     {
         $cache_key = md5("__twitterplugin_cache_user_timeline");
 
-        if ($jsonString = $this->container->get('cache')->fetch($cache_key)) {
+        if ($jsonString = $this->container->get('newscoop.cache')->fetch($cache_key)) {
             $json = unserialize($jsonString);
         } else {
             $twitterClient = $this->container->get('guzzle.twitter.client');
             $json = $twitterClient->get('statuses/user_timeline.json')
              ->send()->getBody();
-            $this->container->get('cache')->save($cache_key, serialize($json));
+            $this->container->get('newscoop.cache')->save($cache_key, serialize($json));
         }
 
         $twitterFeed = json_decode($json, true);
@@ -44,7 +43,7 @@ class TwitterController extends Controller
 
         $html = "<p class='entry'>".$tweetMsg."</p>";
         $html .= "<p class='tweet_meta'> <a href='http://twitter.com/".$tweetCreatedBy."' class='account_name' target='_blank'>@".$tweetCreatedBy."</a>";
-        $html .= "<span class='tweet_published'> <a href='http://www.twitter.com/".$tweetCreatedBy."/status/". $latestTweet["id"]."' target='_blank'>".$tweetCreatedAt."</a></span>"; 
+        $html .= "<span class='tweet_published'> <a href='http://www.twitter.com/".$tweetCreatedBy."/status/". $latestTweet["id"]."' target='_blank'>".$tweetCreatedAt."</a></span>";
 
         return new Response($html);
 
